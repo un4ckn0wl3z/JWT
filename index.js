@@ -1,14 +1,22 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-/** connect to db */
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true } , () => {
-    console.log('Connected to db!');
-});
+
 
 /** import routes */
 const authRoute = require('./routes/auth');
+
+dotenv.config();
+
+/** connect to db */
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true } , () => {
+    console.log('Connected to db!');
+});
+
+/** middleware */
+app.use(express.json());
 
 /** route middleware */
 app.use('/api/user', authRoute);
