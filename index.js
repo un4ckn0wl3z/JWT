@@ -7,6 +7,8 @@ const dotenv = require('dotenv');
 
 /** import routes */
 const authRoute = require('./routes/auth');
+const postRoute = require('./routes/posts');
+
 
 dotenv.config();
 
@@ -20,6 +22,8 @@ app.use(express.json());
 
 /** route middleware */
 app.use('/api/user', authRoute);
+app.use('/api/posts', postRoute);
+
 
 /** binding */
 app.listen(3000,() => {
